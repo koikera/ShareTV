@@ -1,6 +1,0 @@
-@ShareTV.Domain_HostAddress = http://localhost:5008
-
-GET {{ShareTV.Domain_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

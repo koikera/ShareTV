@@ -1,25 +1,16 @@
-# ShareTV
-📘 Documentação da API - Plataforma de Streaming
-Backend desenvolvido em .NET 8 com EF Core e SQLite.
+# 📺 ShareTV - Plataforma de Streaming
 
-📁 Endpoints
-▶️ Criar uma nova live
-POST /api/stream/create
+Backend desenvolvido em **.NET 8** com **Entity Framework Core** e **SQLite**. A API possui os seguintes endpoints:  
 
-Cria uma nova live com título, descrição e gera uma chave de stream única.
+**POST /api/stream/create** — Cria uma nova live com título, descrição e gera uma chave única para streaming. Exemplo de requisição JSON:  
 
-Requisição (JSON):
-json
-Copiar
-Editar
 {
   "title": "Live com Matheus",
   "description": "Primeira transmissão de teste"
 }
-Resposta (200 OK):
-json
-Copiar
-Editar
+
+Resposta JSON:  
+
 {
   "id": 1,
   "streamKey": "b1dc7351-f324-41bc-984b-c3a2bfa5fdab",
@@ -28,15 +19,9 @@ Editar
   "createdAt": "2025-06-25T18:30:00Z",
   "isLive": false
 }
-📄 Listar todas as lives
-GET /api/stream
 
-Retorna uma lista de lives cadastradas.
+**GET /api/stream** — Retorna a lista de lives cadastradas, exemplo de resposta:  
 
-Resposta:
-json
-Copiar
-Editar
 [
   {
     "id": 1,
@@ -45,50 +30,40 @@ Editar
     "description": "Primeira transmissão de teste",
     "createdAt": "2025-06-25T18:30:00Z",
     "isLive": false
-  },
-  ...
+  }
 ]
-🗃️ Modelo: LiveStream
-Campo	Tipo	Descrição
-id	int	Identificador da live
-streamKey	string	Chave única para envio via OBS
-title	string	Título da live
-description	string	Descrição opcional da live
-createdAt	DateTime	Data de criação
-isLive	bool	Status da transmissão (online?)
 
-🏗️ Setup do Projeto
-Criar projeto
+O modelo de dados para uma live (`LiveStream`) possui os campos:  
+`id` (int, identificador),  
+`streamKey` (string, chave única para envio via OBS),  
+`title` (string, título da live),  
+`description` (string, descrição opcional),  
+`createdAt` (DateTime, data de criação) e  
+`isLive` (bool, status da transmissão online).
 
-bash
-Copiar
-Editar
-dotnet new webapi -n StreamPlatform.API
-Instalar dependências
+Setup do projeto: criar projeto Web API com  
 
-bash
-Copiar
-Editar
-dotnet add package Microsoft.EntityFrameworkCore.Sqlite
-dotnet add package Microsoft.EntityFrameworkCore.Tools
-Executar migração
+`dotnet new webapi -n StreamPlatform.API`,  
 
-bash
-Copiar
-Editar
-dotnet ef migrations add Initial
-dotnet ef database update
-Rodar projeto
+instalar dependências com  
 
-bash
-Copiar
-Editar
-dotnet run
-📺 Integração com OBS (futura)
-Você pode enviar vídeo ao vivo via OBS para um servidor RTMP com a seguinte URL:
+`dotnet add package Microsoft.EntityFrameworkCore.Sqlite` e  
+`dotnet add package Microsoft.EntityFrameworkCore.Tools`,  
 
-arduino
-Copiar
-Editar
-rtmp://<seu-servidor>:1935/live
-Use a streamKey retornada pela API como Stream Key no OBS.
+criar e aplicar migração inicial com  
+
+`dotnet ef migrations add Initial` e  
+`dotnet ef database update`,  
+
+e rodar o projeto com  
+
+`dotnet run`.
+
+Integração futura com OBS: envie vídeo ao vivo para o servidor RTMP na URL  
+
+`rtmp://<seu-servidor>:1935/live`  
+
+usando a `streamKey` retornada pela API como Stream Key no OBS.
+
+Seja bem-vindo(a) ao ShareTV! 🚀  
+Quer ajudar no projeto? Sinta-se à vontade para contribuir!
